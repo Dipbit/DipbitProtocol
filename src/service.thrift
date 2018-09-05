@@ -24,11 +24,11 @@ exception NotSupportOperationException{
 }
 
 service TransactionSerivce{
-    models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionConfig config),
+    models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionParam param),
     models.ChainTransaction send(1:models.CoinChannel channel, 2:models.SendRequest ctSource),
 
-    models.ChainTransaction queryTransaction(1:models.CoinChannel channel, 2:models.ChainTransaction chainTransaction),
-    list<models.ChainTransaction> fetchChainTxs(1:models.CoinChannel channel, 2:models.FetchChainTxParam fetchChainTxParam),
+    models.ChainTransaction queryTransaction(1:models.CoinChannel channel, 2:string txId),
+    list<models.ChainTransaction> queryTransactions(1:models.CoinChannel channel, 2:models.QueryParam queryParam),
     map<models.Address, models.BigDecimal> getBalance(1:models.CoinChannel channel, 2:list<models.Address> account),
     models.TransactionStatus confirmStatus(1:models.ChainTransaction chainTransaction, 2:models.CoinChannel channel),
 

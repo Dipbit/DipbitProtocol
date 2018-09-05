@@ -21,7 +21,6 @@ namespace * com.dipbit.model
 *  Catetory
 **/
 enum Category{
-    UNSPEND=0,
     CREATE_AND_SIGN=1,
     DIRECT_SEND=2
 }
@@ -34,29 +33,79 @@ enum TransactionStatus{
     EXPIRED=4
 }
 
-struct SendRequest{
+enum Direction{
+    IN=0,
+    OUT=1,
+}
 
+enum MemoType{
+    DEFAULT=0,
+    AUTO_GENERATE_SEQUENCE=1,
+}
+
+struct SendRequest{
+    1:string currencuy,
+    2:string txId,
+    3:BigDecimal amount,
+    4:BigDecimal fee,
+    5:list<TransactionIO> ioList,
+    6:map<string,string> properties
 }
 
 struct CoinChannel{
-
+    1:string id,
+    2:string name,
+    3:string currency,
+    4:i32 status,
+    5:string rpcURL,
+    6:string rpcPort,
+    7:string rpcPassword,
+    8:string rpcUser,
+    9:string config,
+    10:string extra
 }
 
-struct TransactionConfig{
+struct TransactionParam{
+    1:list<TransactionIO> addressList,
+    2:string channelId,
+    3:map<string,string> properties
+}
 
+struct TransactionIO{
+    1:string address,
+    2:string memo,
+    3:BigDecimal amount,
+    4:Direction direction,
 }
 
 struct ChainTransaction{
     1:Category category,
+    2:string txId,
+    3:string currency,
+    4:i32 status,
+    5:BigDecimal fee,
+    6:i32 confirmations,
+    7:string blockHash,
+    8:string blockIndex,
+    9:i64 blockTime,
+    10:i64 receiveTime,
+    11:string txResult,
+    12:list<TransactionIO> ioList,
+    13:map<string,string> properties,
 }
 
 struct Address{
-
+    1:string address,
+    2:string memo,
+    3:MemoType memoType = MemoType.DEFAULT
 }
 
 typedef string BigDecimal
 
 
-struct FetchChainTxParam{
-
+struct QueryParam{
+    1:i64 startReceiveTime,
+    2:i64 endReceiveTime,
+    3:string startBlockHash,
+    4:string startBlockIndex
 }
