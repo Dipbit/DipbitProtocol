@@ -18,10 +18,12 @@
  */
 namespace * com.dipbit.model
 /**
-*  Catetory
+*  transaction mode
 **/
 enum Category{
+    /** two-step transaction mode*/
     CREATE_AND_SIGN=1,
+    /** one-step transaction mode*/
     DIRECT_SEND=2
 }
 
