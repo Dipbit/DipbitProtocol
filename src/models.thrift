@@ -27,11 +27,19 @@ enum Category{
     DIRECT_SEND=2
 }
 
+/**
+* status of transaction
+**/
 enum TransactionStatus{
+    /** init status*/
     CREATED=0,
+    /** the transaction has been sent to public chain */
     SENT=1,
+    /** the transaction has been confirmed on public chain, this is the success status*/
     CONFIRMED=2,
+    /** failed status */
     FAILED=3,
+    /** failed status on Dipbit platform */
     EXPIRED=4
 }
 
@@ -45,13 +53,22 @@ enum MemoType{
     AUTO_GENERATE_SEQUENCE=1,
 }
 
+/***
+* the request for launching a transaction
+**/
 struct SendRequest{
+    /** the currency name of coin, which will be BTC for Bitcoin and ETH for Ethereum */
     1:string currencuy,
-    2:string txId,
+    /** transaction ID, for one-step transaction mode, this is optional */
+    2:optional string txId,
+    /** the transaction amount, must be greater then ZERO*/
     3:BigDecimal amount,
+    /** transaction fee, default is "0.0" */
     4:BigDecimal fee,
+    /** transaction details  */
     5:list<TransactionIO> ioList,
-    6:map<string,string> properties
+    /** extra parameters, reserved for further use, in most cases, this field will not be used*/
+    6:optional map<string,string> properties,
 }
 
 struct CoinChannel{
@@ -84,7 +101,7 @@ struct ChainTransaction{
     1:Category category,
     2:string txId,
     3:string currency,
-    4:i32 status,
+    4:TransactionStatus status,
     5:BigDecimal fee,
     6:i32 confirmations,
     7:string blockHash,

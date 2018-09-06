@@ -7,7 +7,7 @@ enum Category{
 }
 ```
 `Category` is the transaction mode. <br/>
-On Dipbit platform, two transaction modes will be supported, the first mode is one-step transaction mode, 
+On Dipbit platform, two transaction modes are supported, the first is one-step transaction mode, 
 the other is two-step transaction mode. <br/>
 Two-step transaction mode means when a transaction need to be sent to public chain, it can be constructed firstly, 
 and additional operations like signing the transaction, saving the transaction to database can be done before the 
@@ -29,5 +29,10 @@ Sequence Diagram: ![State Diagram of TransactionStatus](https://raw.githubuserco
 `EXPIRED` the transaction will be mark as failed on Dipbit platform and will not be processed any more on Dipbit platform. <br/>
 
 State Diagram: ![State Diagram of TransactionStatus](https://raw.githubusercontent.com/Dipbit/DipbitProtocol/master/docs/Diagrams-TransactionStatusStateDiagram.png)
+
+## ChainTransaction
+`ChainTransaction` is  transaction object returned by wallet which contains the transaction details including 
+
+## TransactionIO
 
 
