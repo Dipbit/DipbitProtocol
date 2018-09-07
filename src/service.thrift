@@ -20,16 +20,33 @@ namespace * com.dipbit.service
 include 'models.thrift'
 
 exception NotSupportOperationException{
+    1:i32 code,
+    2:string msg
+}
 
+exception WalletException{
+    1:i32 code,
+    2:string msg
+}
+
+enum WalletCommonException{
+    /** method create exception*/
+    CREATE_AND_SIGN_FAIL=0,
+    /** Clearly know that the transaction was not sent to the chain and an exception occurred */
+    SENT_FAIL=1,
+    /** The transaction has been or maybe sent to the chain, but an exception was thrown*/
+    SENT_UNKNOWN_RESULT=2,
+    /** invalid address or memo */
+    INVALID_ADDRESS=3,
 }
 
 service TransactionSerivce{
-    models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionParam param),
+    models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionParam param) throws (1:WalletException e),
     models.ChainTransaction send(1:models.CoinChannel channel, 2:models.SendRequest ctSource),
 
     models.ChainTransaction queryTransaction(1:models.CoinChannel channel, 2:string txId),
     list<models.ChainTransaction> queryTransactions(1:models.CoinChannel channel, 2:models.QueryParam queryParam),
-    map<models.Address, models.BigDecimal> getBalance(1:models.CoinChannel channel, 2:list<models.Address> account),
+    map<models.Address, models.BigDecimal> getBalance(1:models.CoinChannel channel, 2:list<models.Address> accounts),
     models.TransactionStatus confirmStatus(1:models.ChainTransaction chainTransaction, 2:models.CoinChannel channel),
 
     models.Address createAddress(1:models.CoinChannel channel, 2:string account),
