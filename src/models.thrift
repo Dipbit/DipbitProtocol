@@ -40,17 +40,19 @@ enum TransactionStatus{
     /** failed status */
     FAILED=3,
     /** failed status on Dipbit platform */
-    EXPIRED=4
+    EXPIRED=4,
+    /** unknown or unconfirm status */
+    UNKNOWN=5
 }
 
 /**
 *  sending or receiving
 **/
 enum Direction{
-    /** for address receiving digital crypto currency, IN should be used*/
-    IN=0,
-    /** for address sending digital crypto currency, OUT should be used*/
-    OUT=1,
+    /** for address receiving digital crypto currency, RECEIVE should be used*/
+    RECEIVE=0,
+    /** for address sending digital crypto currency, SEND should be used*/
+    SEND=1,
 }
 
 enum MemoType{
@@ -66,14 +68,12 @@ struct SendRequest{
     1:string currencuy,
     /** transaction ID, for one-step transaction mode, this is optional */
     2:optional string txId,
-    /** the transaction amount, must be greater then ZERO*/
-    3:BigDecimal amount,
     /** transaction fee, default is "0.0" */
-    4:BigDecimal fee,
+    3:BigDecimal fee,
     /** transaction details  */
-    5:list<TransactionIO> ioList,
-    /** extra parameter, reserved for further use, in most cases, this field will not be used*/
-    6:optional map<string,string> properties,
+    4:list<TransactionIO> ioList,
+    /** extra parameters, reserved for further use, in most cases, this field will not be used*/
+    5:optional map<string,string> properties,
 }
 
 /***
@@ -88,16 +88,18 @@ struct CoinChannel{
     3:string currency,
     /** the rpc URL of the wallet*/
     4:string rpcURL,
+    /** the rpc protocol of the wallet*/
+    5:string rpcProtocol,
     /** the rpc port of the wallet*/
-    5:string rpcPort,
+    6:i32 rpcPort,
     /** the rpc password of the wallet*/
-    6:string rpcPassword,
+    7:optional string rpcPassword,
     /** the rpc usser of the wallet */
-    7:string rpcUser,
+    8:optional string rpcUser,
     /** other configuration of the walet, this will be a json string*/
-    8:string config,
+    9:optional string config,
     /*** reserved extra configuration, normally this should not be used */
-    9:string extra
+    10:optional string extra
 }
 
 /***
@@ -105,19 +107,23 @@ struct CoinChannel{
 **/
 struct TransactionParam{
     /** transaction items*/
-    1:list<TransactionIO> addressList,
+    1:list<TransactionIO> ioList,
     /** ID of CoinChannel*/
     2:string channelId,
+    /** when building the transaction, if you need to change to address */
+    3:optional Address changeAddress,
     /** extra properties, normally this will be empty for reserved usage*/
-    3:map<string,string> properties
+    4:optional map<string,string> properties
 }
 
 /**
 * the transaction item of an address sending or receiving digital crypto currency
 **/
 struct TransactionIO{
+    /** the address sending or receiving digital crypto currency*/
     1:string address,
-    2:string memo,
+    /** the transaction memo*/
+    2:optional string memo,
     3:BigDecimal amount,
     4:Direction direction,
 }
@@ -130,18 +136,19 @@ struct ChainTransaction{
     5:BigDecimal fee,
     6:i32 confirmations,
     7:string blockHash,
-    8:string blockIndex,
+    8:optional string blockIndex,
     9:i64 blockTime,
     10:i64 receiveTime,
-    11:string txResult,
+    11:optional string txResult,
     12:list<TransactionIO> ioList,
-    13:map<string,string> properties,
+    13:optional map<string,string> properties,
 }
 
 struct Address{
     1:string address,
-    2:string memo,
-    3:MemoType memoType = MemoType.DEFAULT
+    2:optional string memo,
+    3:optional string account,
+    4:MemoType memoType = MemoType.DEFAULT
 }
 
 typedef string BigDecimal
@@ -150,6 +157,6 @@ typedef string BigDecimal
 struct QueryParam{
     1:i64 startReceiveTime,
     2:i64 endReceiveTime,
-    3:string startBlockHash,
-    4:string startBlockIndex
+    3:optional string startBlockHash,
+    4:optional string startBlockIndex
 }
