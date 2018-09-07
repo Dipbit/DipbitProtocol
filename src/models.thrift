@@ -47,9 +47,9 @@ enum TransactionStatus{
 *  sending or receiving
 **/
 enum Direction{
-    /** for and address receiving digital crypto currency IN should be used*/
+    /** for address receiving digital crypto currency, IN should be used*/
     IN=0,
-    /** for and address sending digital crypto currency OUT should be used*/
+    /** for address sending digital crypto currency, OUT should be used*/
     OUT=1,
 }
 
@@ -76,25 +76,45 @@ struct SendRequest{
     6:optional map<string,string> properties,
 }
 
+/***
+* some wallet configuration
+**/
 struct CoinChannel{
+    /** unique ID for the wallet deployment*/
     1:string id,
+    /** the alias name of the unique ID*/
     2:string name,
+    /** the code of crypto currency, like ETH, BTC*/
     3:string currency,
-    4:i32 status,
-    5:string rpcURL,
-    6:string rpcPort,
-    7:string rpcPassword,
-    8:string rpcUser,
-    9:string config,
-    10:string extra
+    /** the rpc URL of the wallet*/
+    4:string rpcURL,
+    /** the rpc port of the wallet*/
+    5:string rpcPort,
+    /** the rpc password of the wallet*/
+    6:string rpcPassword,
+    /** the rpc usser of the wallet */
+    7:string rpcUser,
+    /** other configuration of the walet, this will be a json string*/
+    8:string config,
+    /*** reserved extra configuration, normally this should not be used */
+    9:string extra
 }
 
+/***
+*  parameters when create a transaction
+**/
 struct TransactionParam{
+    /** transaction items*/
     1:list<TransactionIO> addressList,
+    /** ID of CoinChannel*/
     2:string channelId,
+    /** extra properties, normally this will be empty for reserved usage*/
     3:map<string,string> properties
 }
 
+/**
+* the transaction item of an address sending or receiving digital crypto currency
+**/
 struct TransactionIO{
     1:string address,
     2:string memo,

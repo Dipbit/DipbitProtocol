@@ -36,12 +36,12 @@ State Diagram: ![State Diagram of TransactionStatus](https://raw.githubuserconte
 
 ## TransactionIO
 For each transaction, there will be numbers of sending or receiving items called `TrnasactionIO`. A `TrnasactionIO` 
-represents that an address will send or receive some amount digital crypto currency.
+represents that an address will send or receive some amount digital crypto currency. <br/>
 Take Bitcoin transaction as an example:<br/>
-Transaction _bdd8bce4883676324ebb985cf4fb56d006f658aa75cfbc61f19844bbec48abf0_ includes 8 inputs and 2 outputs.<br/>
-As in `TransactionIO`, the 10 inputs/outputs convert to 10 `TransactionIO`. <br/>
-This diagram illustrates how address send or receive digital crypto currency in BTC transaction: ![State Diagram of TransactionStatus](https://raw.githubusercontent.com/Dipbit/DipbitProtocol/master/docs/Diagrams-TransactionIO.jpg)
-In `TransactionIO`, the property `direction` means the address will send digital crypto currency(OUT) or receive digital crypto currency(IN)
+Transaction _bdd8bce4883676324ebb985cf4fb56d006f658aa75cfbc61f19844bbec48abf0_ includes 8 inputs (UTXO) and 2 outputs.<br/>
+As in `TransactionIO`, the 8 inputs convert to 2 `TransactionIO` based on the addresses, 2 outputs convert to 2 `TransactionIO`<br/>
+This diagram illustrates how Bitcoin transaction convert to `TransactionIO`: ![State Diagram of TransactionStatus](https://raw.githubusercontent.com/Dipbit/DipbitProtocol/master/docs/Diagrams-TransactionIO.jpg)
+In `TransactionIO`, the property `direction` means the address sending digital crypto currency(OUT) or receiving digital crypto currency(IN)
 
 ## 
 
