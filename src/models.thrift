@@ -43,8 +43,13 @@ enum TransactionStatus{
     EXPIRED=4
 }
 
+/**
+*  sending or receiving
+**/
 enum Direction{
+    /** for and address receiving digital crypto currency IN should be used*/
     IN=0,
+    /** for and address sending digital crypto currency OUT should be used*/
     OUT=1,
 }
 
@@ -67,7 +72,7 @@ struct SendRequest{
     4:BigDecimal fee,
     /** transaction details  */
     5:list<TransactionIO> ioList,
-    /** extra parameters, reserved for further use, in most cases, this field will not be used*/
+    /** extra parameter, reserved for further use, in most cases, this field will not be used*/
     6:optional map<string,string> properties,
 }
 

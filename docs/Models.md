@@ -31,8 +31,17 @@ Sequence Diagram: ![State Diagram of TransactionStatus](https://raw.githubuserco
 State Diagram: ![State Diagram of TransactionStatus](https://raw.githubusercontent.com/Dipbit/DipbitProtocol/master/docs/Diagrams-TransactionStatusStateDiagram.png)
 
 ## ChainTransaction
-`ChainTransaction` is  transaction object returned by wallet which contains the transaction details including 
+`ChainTransaction` is the transaction information returned by wallet which contains the transaction details and `TransactionIO`.
+ The transaction detail will include transaction ID, transaction fee, confirmation status, block hash etc. 
 
 ## TransactionIO
+For each transaction, there will be numbers of sending or receiving items called `TrnasactionIO`. A `TrnasactionIO` 
+represents that an address will send or receive some amount digital crypto currency.
+Take Bitcoin transaction as an example:<br/>
+Transaction _bdd8bce4883676324ebb985cf4fb56d006f658aa75cfbc61f19844bbec48abf0_ includes 8 inputs and 2 outputs.<br/>
+As in `TransactionIO`, the 10 inputs/outputs convert to 10 `TransactionIO`. <br/>
+This diagram illustrates how address send or receive digital crypto currency in BTC transaction: ![State Diagram of TransactionStatus](https://raw.githubusercontent.com/Dipbit/DipbitProtocol/master/docs/Diagrams-TransactionIO.jpg)
+In `TransactionIO`, the property `direction` means the address will send digital crypto currency(OUT) or receive digital crypto currency(IN)
 
+## 
 
