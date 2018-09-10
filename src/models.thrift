@@ -49,10 +49,10 @@ enum TransactionStatus{
 *  sending or receiving
 **/
 enum Direction{
-    /** for address receiving digital crypto currency, RECEIVE should be used*/
-    RECEIVE=0,
-    /** for address sending digital crypto currency, SEND should be used*/
-    SEND=1,
+    /** for and address sending digital crypto currency OUT should be used*/
+    SEND=0,
+    /** for and address receiving digital crypto currency IN should be used*/
+    RECEIVE=1,
 }
 
 enum MemoType{
