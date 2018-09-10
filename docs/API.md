@@ -1,4 +1,4 @@
-#API Specification
+# API Specification
 ## com.dipbit.service.TransactionService
 The `com.dipbit.service.TransactionService` contains 12 methods, on two step transaction mode all of the must be implemented;
 on one step transaction mode `create` should throw `NotSupportOperationException`. <br/>
