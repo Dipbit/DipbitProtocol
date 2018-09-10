@@ -124,23 +124,41 @@ struct TransactionIO{
     1:string address,
     /** the transaction memo*/
     2:optional string memo,
+    /** the amount need to be transfered*/
     3:BigDecimal amount,
+    /** sending or receiving*/
     4:Direction direction,
 }
 
+/***
+* the raw information returned by wallet after sending a transaction.
+**/
 struct ChainTransaction{
+    /** transaction mode */
     1:Category category,
+    /** transaction id */
     2:string txId,
+    /** currency name, for example ETC,BTH*/
     3:string currency,
+    /** transaction status*/
     4:TransactionStatus status,
+    /** transaction fee*/
     5:BigDecimal fee,
+    /** confirmation number*/
     6:i32 confirmations,
+    /** block hash of the block containing this transaction */
     7:string blockHash,
+    /** block index of the block containing this transaction */
     8:optional string blockIndex,
+    /** block time of the block generated*/
     9:i64 blockTime,
+    /** the time when the wallet receiving the block*/
     10:i64 receiveTime,
+    /** the raw block chain information*/
     11:optional string txResult,
+    /** transaction sending or receiving items */
     12:list<TransactionIO> ioList,
+    /** reserved for furthur usage, other propeties */
     13:optional map<string,string> properties,
 }
 

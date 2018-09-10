@@ -44,3 +44,7 @@ This diagram illustrates how Bitcoin transaction convert to `TransactionIO`: ![S
 In `TransactionIO`, the property `direction` means the address sending digital crypto currency(OUT) or receiving digital crypto currency(IN)
 ## 
 
+jssqe
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+
