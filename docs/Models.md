@@ -42,9 +42,4 @@ Transaction _bdd8bce4883676324ebb985cf4fb56d006f658aa75cfbc61f19844bbec48abf0_ i
 As in `TransactionIO`, the 8 inputs convert to 2 `TransactionIO` based on the addresses, 2 outputs convert to 2 `TransactionIO`<br/>
 This diagram illustrates how Bitcoin transaction convert to `TransactionIO`: ![State Diagram of TransactionStatus](https://raw.githubusercontent.com/Dipbit/DipbitProtocol/master/docs/Diagrams-TransactionIO.jpg)
 In `TransactionIO`, the property `direction` means the address sending digital crypto currency(OUT) or receiving digital crypto currency(IN)
-## 
-
-jssqe
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
 
