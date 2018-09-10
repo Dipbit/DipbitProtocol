@@ -41,20 +41,32 @@ enum WalletCommonException{
 }
 
 service TransactionSerivce{
+    /** create a transaction before sending*/
     models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionParam param),
+    /** send transaction to wallet*/
     models.ChainTransaction send(1:models.CoinChannel channel, 2:models.SendRequest ctSource),
 
+    /** query a transation*/
     models.ChainTransaction queryTransaction(1:models.CoinChannel channel, 2:string txId),
+    /** query transactions by parameter*/
     list<models.ChainTransaction> queryTransactions(1:models.CoinChannel channel, 2:models.QueryParam queryParam),
+    /** query the balance of accouts*/
     map<models.Address, models.BigDecimal> getBalance(1:models.CoinChannel channel, 2:list<models.Address> accounts),
+    /** query the confirm status of a transaction*/
     models.TransactionStatus confirmStatus(1:models.ChainTransaction chainTransaction, 2:models.CoinChannel channel),
 
+    /** create an address for the account*/
     models.Address createAddress(1:models.CoinChannel channel, 2:string account),
+    /** batch create address for accounts*/
     map<string, models.Address> batchCreateAddresses(1:models.CoinChannel channel, 2:list<string> accounts),
+    /** validate a address*/
     bool validateAddress(1:models.CoinChannel channel, 2:models.Address address),
 
+    /**currency name of the digital crypto currency*/
     string currency(),
+    /** transaction mode of the wallet*/
     models.Category category(),
 
+    /** convert the parameters from wallet notify to block chain transaction*/
     models.ChainTransaction processTransaction(1:models.CoinChannel channel, 2:map<string, string> params),
 }
