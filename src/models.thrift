@@ -162,19 +162,33 @@ struct ChainTransaction{
     13:optional map<string,string> properties,
 }
 
+/**
+*  the public address
+**/
 struct Address{
+    /** the public address on the block chain*/
     1:string address,
+    /** memo of the address*/
     2:optional string memo,
+    /** account name of the address*/
     3:optional string account,
+    /** memo type, some wallet only use one address and use generated increment id for different account or user*/
     4:MemoType memoType = MemoType.DEFAULT
 }
 
+/** big decimal is a alias of string the format should be 'xx.xxx' */
 typedef string BigDecimal
 
-
+/***
+* parameters of the query operation
+**/
 struct QueryParam{
+    /** the stat time of block received*/
     1:i64 startReceiveTime,
+    /** the end time of block received*/
     2:i64 endReceiveTime,
+    /** the start block hash*/
     3:optional string startBlockHash,
+    /** the start block index*/
     4:optional string startBlockIndex
 }
