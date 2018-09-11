@@ -19,10 +19,6 @@
 namespace * com.dipbit.service
 include 'models.thrift'
 
-exception NotSupportOperationException{
-    1:i32 code,
-    2:string msg
-}
 
 exception WalletException{
     1:i32 code,
@@ -38,29 +34,33 @@ enum WalletCommonException{
     SENT_UNKNOWN_RESULT=2,
     /** invalid address or memo */
     INVALID_ADDRESS=3,
+    /** create address fail */
+    CREATE_ADDRESS_FAIL=4,
+    /** */
+    UNSUPPORTED_OPERATION=5,
 }
 
 service TransactionSerivce{
     /** create a transaction before sending*/
-    models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionParam param),
+    models.SendRequest create(1:models.CoinChannel channel, 2:models.TransactionParam param) throws (1: WalletException e),
     /** send transaction to wallet*/
-    models.ChainTransaction send(1:models.CoinChannel channel, 2:models.SendRequest ctSource),
+    models.ChainTransaction send(1:models.CoinChannel channel, 2:models.SendRequest ctSource) throws (1: WalletException e),
 
     /** query a transation*/
-    models.ChainTransaction queryTransaction(1:models.CoinChannel channel, 2:string txId),
+    models.ChainTransaction queryTransaction(1:models.CoinChannel channel, 2:string txId) throws (1: WalletException e),
     /** query transactions by parameter*/
-    list<models.ChainTransaction> queryTransactions(1:models.CoinChannel channel, 2:models.QueryParam queryParam),
+    list<models.ChainTransaction> queryTransactions(1:models.CoinChannel channel, 2:models.QueryParam queryParam) throws (1: WalletException e),
     /** query the balance of accouts*/
-    map<models.Address, models.BigDecimal> getBalance(1:models.CoinChannel channel, 2:list<models.Address> accounts),
+    map<models.Address, models.BigDecimal> getBalance(1:models.CoinChannel channel, 2:list<models.Address> accounts) throws (1: WalletException e),
     /** query the confirm status of a transaction*/
-    models.TransactionStatus confirmStatus(1:models.ChainTransaction chainTransaction, 2:models.CoinChannel channel),
+    models.TransactionStatus confirmStatus(1:models.ChainTransaction chainTransaction, 2:models.CoinChannel channel) throws (1: WalletException e),
 
     /** create an address for the account*/
-    models.Address createAddress(1:models.CoinChannel channel, 2:string account),
+    models.Address createAddress(1:models.CoinChannel channel, 2:string account) throws (1: WalletException e),
     /** batch create address for accounts*/
-    map<string, models.Address> batchCreateAddresses(1:models.CoinChannel channel, 2:list<string> accounts),
+    map<string, models.Address> batchCreateAddresses(1:models.CoinChannel channel, 2:list<string> accounts) throws (1: WalletException e),
     /** validate a address*/
-    bool validateAddress(1:models.CoinChannel channel, 2:models.Address address),
+    bool validateAddress(1:models.CoinChannel channel, 2:models.Address address) throws (1: WalletException e),
 
     /**currency name of the digital crypto currency*/
     string currency(),
@@ -68,5 +68,5 @@ service TransactionSerivce{
     models.Category category(),
 
     /** convert the parameters from wallet notify to block chain transaction*/
-    models.ChainTransaction processTransaction(1:models.CoinChannel channel, 2:map<string, string> params),
+    models.ChainTransaction processTransaction(1:models.CoinChannel channel, 2:map<string, string> params) throws (1: WalletException e),
 }
