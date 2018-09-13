@@ -171,7 +171,7 @@ struct Address{
     /** memo of the address*/
     2:optional string memo,
     /** account name of the address*/
-    3:optional string account,
+    3:string account,
     /** memo type, some wallet only use one address and use generated increment id for different account or user*/
     4:MemoType memoType = MemoType.DEFAULT
 }
